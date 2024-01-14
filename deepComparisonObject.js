@@ -1,6 +1,10 @@
+// deep comparison of arrays
+const a=[1,[1,2],{a:4}]
+const b=[1,[1,2],{a:4}]
 
-const a={l:1,g:[1,2],t:{a:4}}
-const b={l:1,g:[1,2],t:{a:4}}
+// deep comparison of objects
+const c={a:1,b:[1,2],c:{a:4}}
+const d={a:1,b:[1,2],c:{a:4}}
 
 function checkType(obj) {
     if(Array.isArray(obj)) {
@@ -58,5 +62,7 @@ function deepComparison(obj1,obj2) {
         return true
     }
 }
-const res=deepComparison(a,b)
-console.log(res)
+const res1=deepComparison(a,b)
+console.log(res1) // true
+const res2=deepComparison(c,d)
+console.log(res2) // true
