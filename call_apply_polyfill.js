@@ -10,6 +10,9 @@ f.call(obj,1,2)
 f.apply(obj,[1,2]) 
 
 Function.prototype.myCall=function(context,...args) {
+  if(typeof this!=="function") {
+     throw new Error("Not callable!!!")
+  }
   const key='fn';
   context[key]=this;
   context.fn(...args);
@@ -18,7 +21,10 @@ Function.prototype.myCall=function(context,...args) {
  f.myCall(obj,1,2); 
 
 Function.prototype.myApply=function(context,args) {
-	const key='fn';
+ if(typeof this!=="function") {
+     throw new Error("Not callable!!!")
+  }
+  const key='fn';
   context[key]=this;
   context.fn(...args);
 }
