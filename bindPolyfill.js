@@ -11,7 +11,10 @@ binded(1,2);
 
 
 Function.prototype.myBind=function(context,...args1) {
-	const key='fn';
+  if(typeof this!=="function") {
+     throw new Error("Not callable!!!")
+  }
+  const key='fn';
   context[key]=this;
   return function(...args2) {
   	context.fn(...args1,...args2);
