@@ -23,8 +23,8 @@ Promise.myAll=function(arr) {
 	const result=[];
   let counter=0;
   return new Promise((res,rej)=>{
-  		for(p in arr) {
-      	arr[p].then((response)=>{
+  		for(p of arr) {
+      	p.then((response)=>{
         	result.push(response);
            counter++;
           if(counter===arr.length) {
