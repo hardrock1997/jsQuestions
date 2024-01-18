@@ -9,9 +9,6 @@ function logic2(ele) {
 }
 
 Array.prototype.myMap=function(logic) {
-  if(!Array.isArray(this)) {
-    throw new Error('not callable!!!')
-  }
   const resultArray=[];
   for(let i=0;i<this.length;++i) {
     resultArray.push(logic(this[i]));
@@ -23,9 +20,6 @@ const res1=[1,2,3].myMap(logic);
 console.log(res3) 
 
 Array.prototype.myFilter=function(logic2) {
-    if(!Array.isArray(this)) {
-    throw new Error('not callable!!!')
-  }
   const resultArray=[];
    for(let i=0;i<this.length;++i) {
      const result=logic2(this[i]);
