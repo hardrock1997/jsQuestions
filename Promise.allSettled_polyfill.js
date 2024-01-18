@@ -26,8 +26,8 @@ Promise.myAllSettled=function(arr) {
 	const result=[];
   let count=0;
   return new Promise((res)=>{
-  	for(p in arr) {
-    	arr[p].then((response)=>{
+  	for(p of arr) {
+    	p.then((response)=>{
       	result.push({status:"fullfilled",value:response});
         count++;
         if(count===arr.length) {
