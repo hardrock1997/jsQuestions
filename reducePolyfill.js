@@ -1,7 +1,4 @@
 Array.prototype.myReduce=function(cb,initialVal) {
-  if(!Array.isArray(this)) {
-    throw new Error('not callable!!!')
-  }
 	let acc,cv,index;
 		if(initialVal) {
 	  	acc=initialVal;
