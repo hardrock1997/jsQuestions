@@ -1,3 +1,10 @@
+// <body>
+//    <button id='btn'>
+//      click me
+//    </button>
+// </body>
+
+
 const button=document.getElementById('btn');
 let clickedTimes=0;
 const str='btn clicked';
