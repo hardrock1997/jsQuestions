@@ -1,33 +1,38 @@
-// <body>
-//    <button id='btn'>
-//      click me
-//    </button>
-// </body>
 
 
-const button=document.getElementById('btn');
-let clickedTimes=0;
-const str='btn clicked';
-
-/*have to debounce the handleClick function, so instead of handleClick,debouncedHandleClick will be used */
-function handleClick(str) {
-  console.log(str,clickedTimes++);
-} 
-/*debouncedHandleClick is debounced*/
-const debouncedHandleClick=myDebounce(handleClick,1000);
-function execute() {
-	debouncedHandleClick(str);
-}
-button.addEventListener('click',execute);
-
-function myDebounce(cb,delay=800) {
+function debounce(func,delay=500) {
 	let timer;
-  return function(...args) {
-      if(timer) {
-        clearTimeout(timer);
-      }
-			timer=setTimeout(()=>{
-      	cb(...args)
-      },delay)
+	return function() {
+  	
+    if(timer) {
+    	clearTimeout(timer);
+    }
+    const args=arguments;
+    timer=setTimeout(()=>{
+    	func.apply(this,args)
+    },delay)
   }
 }
+
+
+function expensiveFn(e) {
+  console.log('clicked',e.target.value);
+}
+const button = document.getElementsByClassName('btn')[0];
+const betterFnForClick=debounce(expensiveFn,500);
+button.addEventListener('click',betterFnForClick);
+
+const input=document.getElementById('input');
+const betterFnForTyped=debounce(expensiveFn,500);
+input.addEventListener('keyup',betterFnForTyped);
+
+
+
+
+
+ 
+ 
+ 
+
+
+
