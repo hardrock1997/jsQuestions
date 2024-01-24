@@ -1,33 +1,20 @@
-// <body>
-//    <button id='btn'>
-//      click me
-//    </button>
-// </body>
-
-
-const button=document.getElementById('btn');
-let clickedTimes=0;
-const str='btn clicked';
-
-/*have to throttle the handleClick function, so instead of handleClick,throttledHandleClick will be used */
-function handleClick(str) {
-  console.log(str,clickedTimes++);
-} 
-/*debouncedHandleClick is debounced*/
-const throttledHandleClick=myThrottle(handleClick,1000);
-function execute() {
-	throttledHandleClick(str);
+const button = document.getElementsByClassName('btn')[0];
+function expensiveFn() {
+  console.log('clicked');
 }
-button.addEventListener('click',execute);
+var betterFn=throttle(expensiveFn,500);
+button.addEventListener('click',betterFn);
 
-function myThrottle(cb,delay=800) {
-	let last=0;
-  return function(...args) {
-  	let now=new Date().getTime();
-  	if(now-last<delay) {
-    	return;
+function throttle(func,limit=200) {
+  let flag=true;
+  return function() {
+    if(flag) {
+      const args=arguments;
+      func.apply(this,args)
+      flag=false;
+      setTimeout(()=>{
+        flag=true;
+      },limit)
     }
-    last=now;
-    return cb(...args)
   }
-}
+}  
