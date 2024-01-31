@@ -1,24 +1,26 @@
-Array.prototype.myReduce=function(cb,initialVal) {
-	let acc,cv,index;
-		if(initialVal) {
-	  	acc=initialVal;
-	    index=0;
-	  }
-	  else {
-	  	acc=this[0];
-	    index=1;
-	  }
-	  
-	 for(;index<this.length;++index) {
-	    cv=this[index];
-	    acc=cb(acc,cv);
-	  } 
-	  return acc;
+Array.prototype.myReduce=function(cb,initialValue,index,array=this) {
+	if(!Array.isArray(array)) {
+  	throw new Error('Not callable!!!');
+  }
+  if(!initialValue && array.length===0) {
+  	throw new Error('Empty array!!!')
+  }
+  if(array.length===1) {
+    return array[0];
+  }
+  
+  let acc=initialValue!==undefined?initialValue:array[0];
+  index=acc===initialValue?0:1;
+
+   for(;index<array.length;++index) {
+    acc=logic.call(this,acc,array[index]);   
+  }
+ return acc;
 }
 
-const res=[1,2,3,4].myReduce(cb,0);
-console.log(res);
+function logic(acc,cv) {
+  return acc+cv;
+ }
 
-function cb(acc,cv) {
-	return acc+cv;
-}
+const result=[1,2,3].myReduce(logic,0);
+console.log(result);
