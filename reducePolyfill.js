@@ -13,7 +13,7 @@ Array.prototype.myReduce=function(cb,initialValue,index,array=this) {
   index=acc===initialValue?0:1;
 
    for(;index<array.length;++index) {
-    acc=logic.call(this,acc,array[index]);   
+    acc=cb.call(this,acc,array[index]);   
   }
  return acc;
 }
