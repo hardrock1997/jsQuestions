@@ -140,4 +140,39 @@ custom function,s __proto__ -> Function.prototype object (if not found then)  Fu
 custom array,s _proto__ -> Array.prototype object (if not found then) Array.prototype,s __proto__  Object.prototype,s __proto__ -> null (error is thrown).
 */
 
+// Getting the value of __proto__ and setting the value of __proto__, taking an example for that
 
+function UserCreator(name,score) {
+  this.name=name;
+  this.score=score;
+}
+UserCreator.prototype.increment=function() {
+  this.score++;
+  console.log(this.score);
+}
+UserCreator.prototype.login=function() {
+  console.log('login');
+}
+
+const user1= new UserCreator('yash',10);
+
+console.log(Object.getPrototypeOf(user1)); // user1 by default (due to new keyword)
+
+console.log(user1.__proto__); // user1 by default (due to new keyword)
+
+console.log(Object.getPrototypeOf(user1)===user1.__proto__) // true
+
+const anotherObject={
+	prop:10
+}
+
+Object.setPrototypeOf(user1,anotherObject) // setting the prototype of user1 to some other object, can be a function or array as well. The prototype can only be set to either some object or null.
+
+console.log(Object.getPrototypeOf(user1))// anotherObject
+console.log(Object.getPrototypeOf(user1)===anotherObject); // true
+console.log(user1.__proto__===anotherObject) //true
+
+//Imp-> Usage of Object.setPrototypeOf() and Object.getPrototypeOf() is the preferred way rather than using __proto__
+
+
+ 
