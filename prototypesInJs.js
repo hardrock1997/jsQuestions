@@ -115,7 +115,7 @@ are stored is now handled by the class keyword in Js.
 new keyword is setting the this keyword  to the object created by the constructor(), pointing the __proto__ of that object to the prototype of UserCreator() and returning the object.
   */
 
-Prototypal chaining and inheritance
+// Prototypal chaining and inheritance
 /*
 	Every object in js has a __proto__ property.
 	Every function in js is an object,the prototype property of the function(object and function combo of function) has its own __proto__ property as 
