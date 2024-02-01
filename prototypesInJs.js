@@ -114,3 +114,30 @@ are stored is now handled by the class keyword in Js.
 
 new keyword is setting the this keyword  to the object created by the constructor(), pointing the __proto__ of that object to the prototype of UserCreator() and returning the object.
   */
+
+Prototypal chaining and inheritance
+/*
+	Every object in js has a __proto__ property.
+	Every function in js is an object,the prototype property of the function(object and function combo of function) has its own __proto__ property as 
+	prototype is itself an object.
+	
+Also js by default gives us Object, Function and Array as function+object combo with the object combo having the prototype object and their own hidden properties __proto__
+
+If finding a property in functions that are not inside them , their __proto__ (from the object part of the function) looks in the Function prototype property, if not found there then the __proto__ inside the Function.prototype object looks in the Object.prototype object. If not found there then error is thrown as the __proto__ of the Object.prototype object points to null. That is the last in the chain.
+
+If finding a property in objects that are not inside them , their __proto__ looks for that in the Object.prototype object. If not found there then the error is thrown as the __proto__ of the Object.prototype object points to null. That is the last in the chain.
+
+If finding a property in arrays that are not inside them , their __proto__ looks for that in the Array.prototype object. if not found there then js looks for that property inside the Object.prototype object through the __proto__ link of the Array.prototype object. Finally if not found in the Object.prototype object then the error is thrown as the __proto__ of the Object.prototype object points to null. That is the last in the chain.
+
+This chain of __proto__ inside our custom objects, arrays and functions and then the __proto__ property inside the Object.prototype, Funciton.prototype and Array.prototype objects is called the prototypal chaining and due to this link/chaining js helps us in getting the access to the properties 
+that are so called hidden from us.
+
+
+The prototypal chaining looks like this:
+
+custom object,s __proto__ -> Object.prototype object (if not found then) Object.prototype,s __proto__ -> null (error is thrown).
+custom function,s __proto__ -> Function.prototype object (if not found then)  Function.prototype,s __proto__ -> Object.prototype,s __proto__ -> null (error is thrown).
+custom array,s _proto__ -> Array.prototype object (if not found then) Array.prototype,s __proto__  Object.prototype,s __proto__ -> null (error is thrown).
+*/
+
+
