@@ -74,3 +74,43 @@ on invoking user1.increment() , new execution context is created and this keywor
 To make it work we should implement the add1() as an arrow function. Arrow functions take the value of this keyword from its enclosing lexical scope which in this case is increment() in the prototype object of UserCreator function. Value of this keyword inside the increment() is user1 object (user1.increment()) and so this.score++ is user1.score++ and hence we get the output 11 as in the previous case. 
 
 */
+
+
+class UserCreator {
+	constructor(name,score) {
+  	this.name=name;						
+    this.score=score;
+  }
+  increment() {
+  	this.score++;
+  }
+  login() {
+  	console.log('login');
+  }
+
+}
+const user1=new UserCreator("yash",10);
+user1.increment();
+
+	/*
+  constructor(name,score) {
+  	this.name=name;						
+    this.score=score;
+  }   
+  is playing the role of 
+  
+  function UserCreator(name,score) {
+  this.name=name;
+  this.score=score;
+}
+ increment() {
+  	this.score++;
+  }
+  login() {
+  	console.log('login');
+  }
+The function combo of object and a normal function with prototype property inside that object and the prototype property pointing to the inner object where all the methods of the object 
+are stored is now handled by the class keyword in Js.
+
+new keyword is setting the this keyword  to the object created by the constructor(), pointing the __proto__ of that object to the prototype of UserCreator() and returning the object.
+  */
