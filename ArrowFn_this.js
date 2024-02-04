@@ -31,6 +31,6 @@ Due to the behaviour of arrow functions with the 'this' keyword. secondRes has t
 Since,fn is an arrow function and the (context for 'this' is decided by the enclosing lexical scope which in this case is the globalObject for the function fn)
 and there is no print2() defined in the globalObject. Hence we get the error.
 
-To resolve the error, if we define print2 function with a var keyword and not a const/let keyword, we will get the desired output of 5.
+To resolve the error, if we define print2 function with a var keyword in the globalObject(window) and not a const/let keyword, we will get the desired output of 5.
 let/const will not work because they do not become the properties of the window(globalObject) and only var variables become the properties of the window(globalObject).
 */
