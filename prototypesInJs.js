@@ -46,7 +46,7 @@ user1 now has an object which has the properties: name and score in it and its h
 
 function UserCreator(name,score) {
 	this.name=name;
-  this.score=score;
+  	this.score=score;
 }
 UserCreator.prototype.increment=function() {
 /* 	function add1(){
@@ -54,9 +54,9 @@ UserCreator.prototype.increment=function() {
 	    console.log(this.score);
 	  }
 	  add1(); */
-    const add1=()=>{
-    	this.score++;
-      console.log(this.score);
+    	const add1=()=>{
+    	    this.score++;
+            console.log(this.score);
     }
     add1();
 }
