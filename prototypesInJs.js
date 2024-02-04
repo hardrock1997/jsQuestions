@@ -79,7 +79,7 @@ To make it work we should implement the add1() as an arrow function. Arrow funct
 class UserCreator {
 	constructor(name,score) {
   	this.name=name;						
-    this.score=score;
+        this.score=score;
   }
   increment() {
   	this.score++;
