@@ -19,8 +19,6 @@ const p3=new Promise((res,rej)=>{
 
 const arr=[p1,p2,p3];
 
-Promise.allSettled(arr).then(res=>console.log(res))
-
 
 Promise.myAllSettled=function(arr) {
 	const result=[];
@@ -29,14 +27,12 @@ Promise.myAllSettled=function(arr) {
   	for(p of arr) {
     	p.then((response)=>{
       	result.push({status:"fullfilled",value:response});
-        count++;
-        if(count===arr.length) {
+        if(result.length===arr.length) {
         	res(result);
         }
       }).catch((err)=>{
       		result.push({reason:err,status:"rejected"});
-          count++;
-          if(count===arr.length) {
+          if(result.length===arr.length) {
           	res(result);
           }
       })
