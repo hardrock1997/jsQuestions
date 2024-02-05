@@ -1,26 +1,23 @@
-Array.prototype.myReduce=function(cb,initialValue,index,array=this) {
-	if(!Array.isArray(array)) {
-  	throw new Error('Not callable!!!');
-  }
-  if(!initialValue && array.length===0) {
-  	throw new Error('Empty array!!!')
-  }
-  if(array.length===1) {
-    return array[0];
-  }
-  
-  let acc=initialValue!==undefined?initialValue:array[0];
-  index=acc===initialValue?0:1;
-
-   for(;index<array.length;++index) {
-    acc=cb.call(this,acc,array[index]);   
-  }
- return acc;
+function logic(acc, cv) {
+  return acc + cv;
 }
 
-function logic(acc,cv) {
-  return acc+cv;
- }
+Array.prototype.myReduce = function(cb, initialValue) {
 
-const result=[1,2,3].myReduce(logic,0);
-console.log(result);
+  if (initialValue === undefined && this.length === 0) {
+    throw Error('Reduce not callable on empty array with no intialValue');
+  }
+  let acc = initialValue !== undefined ? initialValue : this[0];
+  let index = acc === initialValue ? 0 : 1;
+
+
+  for (; index < this.length; ++index) {
+    acc = cb(acc, this[index]);
+  }
+  return acc;
+}
+
+const arr=[1,2,3];
+
+const res = arr.myReduce(logic, 0);
+console.log(res);
