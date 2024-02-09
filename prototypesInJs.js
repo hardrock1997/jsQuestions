@@ -174,5 +174,13 @@ console.log(user1.__proto__===anotherObject) //true
 
 //Imp-> Usage of Object.setPrototypeOf() and Object.getPrototypeOf() is the preferred way rather than using __proto__
 
+// Object.create(null) or Object.create(<custom object>)
+/*
+if a custom object is passed in create() then the __proto__ link of the created object is linked to the passed custom object.Then the 
+prototypal chaining is same as that of any custom object created in Js.
+if null is passed in create() then the object created has no properties in it and is created with null prototype.
+
+
+*/
 
  
