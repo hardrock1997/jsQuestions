@@ -1,39 +1,48 @@
-  const p1 = new Promise((res) => {
+const p1 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res('p1 resolved')
+  }, 3000);
+})
 
-    setTimeout(() => {
-      res(1);
-    }, 1000)
-  })
-  const p2 = new Promise((res) => {
+const p2 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res('p2 resolved')
+  }, 2000);
+})
 
-    setTimeout(() => {
-      res(2);
-    }, 2000)
-  })
-  const p3 = new Promise((res, rej) => {
+const p3 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res('p3 resolved')
+  }, 1000);
+})
 
-    setTimeout(() => {
-      res(3);
-    }, 3000)
-  })
+const promises = [p1, p2, p3];
 
-  const arr = [p1, p2, p3];
-
-  Promise.myAll = function(arr) {
-    const result = [];
-    return new Promise((res, rej) => {
-      for (p of arr) {
-        p.then((response) => {
-          result.push(response);
-          if (result.length=== arr.length) {
-            res(result);
-          }
-
-        }).catch((err) => {
-          rej("rejected due to " + err);
-        })
-      }
-    })
+Array.prototype.myForEach = function(cb) {
+  for (let index = 0; index < this.length; ++index) {
+    cb(this[index], index)
   }
+}
 
-  Promise.myAll(arr).then(res => console.log(res)).catch(err => console.log(err))
+// foreach loop is used instead of normal for loop because we need the order of promises as that of in the passed array.The then() forms a closure with the index passed as an argument to the cb of forEach and  thus whenever the promise is resolved
+we have the correct value of the index and hence the resolved value is put at the correct index of the result array that matches the order of the promises that is passed.
+Promise.myAll = function(promises) {
+  const result = [];
+  let co = 0;
+  return new Promise((res, rej) => {
+    promises.myForEach((promise, index) => {
+      promise.then((resp) => {
+        result[index] = resp;
+        co++;
+        if (promises.length === co) {
+          res(result);
+        }
+      }).catch((error) => {
+        rej(error);
+      })
+    })
+  })
+}
+
+Promise.myAll(promises).then(res => console.log(res)).catch(error => console.log(error));
+
