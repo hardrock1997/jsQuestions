@@ -11,3 +11,6 @@ var flat = function (arr, n, res=[],curr=0) {
     }
     return res
 };
+
+
+https://leetcode.com/problems/flatten-deeply-nested-array/
