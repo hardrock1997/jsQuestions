@@ -1,43 +1,52 @@
-const p1=new Promise((res,rej)=>{
-
-	setTimeout(()=>{
-  	rej(1);
-  },1000)
-})
-const p2=new Promise((res,rej)=>{
-
-	setTimeout(()=>{
-  	rej(2);
-  },2000)
-})
-const p3=new Promise((res,rej)=>{
-
-	setTimeout(()=>{
-  	rej(3);
-  },3000)
+const p1 = new Promise((res, rej) => {
+  setTimeout(() => {
+    rej('p1 rejected')
+    res('p1 resolved')
+  }, 3000);
 })
 
-const arr=[p1,p2,p3];
+const p2 = new Promise((res, rej) => {
+  setTimeout(() => {
+    rej('p2 rejected')
+    res('p2 resolved')
+  }, 2000);
+})
 
+const p3 = new Promise((res, rej) => {
+  setTimeout(() => {
+    rej('p3 rejected')
+    res('p3 resolved')
+  }, 1000);
+})
 
-Promise.myAllSettled=function(arr) {
-	const result=[];
-  let count=0;
-  return new Promise((res)=>{
-  	for(p of arr) {
-    	p.then((response)=>{
-      	result.push({status:"fullfilled",value:response});
-        if(result.length===arr.length) {
-        	res(result);
+const promises = [p1, p2, p3];
+
+Array.prototype.myForEach = function(cb) {
+  for (let index = 0; index < this.length; ++index) {
+    cb(this[index], index)
+  }
+}
+
+Promise.myAllSettled = function(promises) {
+  const result = [];
+  let co = 0;
+  return new Promise((res, rej) => {
+    promises.myForEach((promise, index) => {
+      promise.then((resp) => {
+        result[index] = resp;
+        co++;
+        if (promises.length === co) {
+          res(result);
         }
-      }).catch((err)=>{
-      		result.push({reason:err,status:"rejected"});
-          if(result.length===arr.length) {
-          	res(result);
-          }
+      }).catch((error) => {
+        result[index] = error
+        co++;
+        if (co === promises.length) {
+          res(result)
+        }
       })
-    }
+    })
   })
 }
 
-Promise.myAllSettled(arr).then(res=>console.log(res));
+Promise.myAllSettled(promises).then(res => console.log(res)).catch(error => console.log(error));
