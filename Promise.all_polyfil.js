@@ -26,6 +26,7 @@ Array.prototype.myForEach = function(cb) {
 
 // foreach loop is used instead of normal for loop because we need the order of promises as that of in the passed array.The then() forms a closure with the index passed as an argument to the cb of forEach and  thus whenever the promise is resolved
 we have the correct value of the index and hence the resolved value is put at the correct index of the result array that matches the order of the promises that is passed.
+// Also, co is used and not the result.length in the if check because as soon as the resolved value is put at any index>0, the result array length becomes equal to index+1 and hence the if condition will give true. 
 Promise.myAll = function(promises) {
   const result = [];
   let co = 0;
