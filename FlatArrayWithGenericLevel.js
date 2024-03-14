@@ -12,5 +12,20 @@ var flat = function (arr, n, res=[],curr=0) {
     return res
 };
 
+// or
+
+function flat(arr,n,curr=0) {
+    let res=[];
+    for(let i=0;i<arr.length;++i) {
+        if(Array.isArray(arr[i]) && curr<n) {
+          res=[...res,...flat(arr[i],n,curr+1)];
+        }
+        else {
+          res.push(arr[i]); 
+        }
+    }
+    return res;
+}
+
 
 https://leetcode.com/problems/flatten-deeply-nested-array/
